@@ -7,6 +7,11 @@ pipeline{
                 git 'https://github.com/mohei20/BMI-Calculator-App.git'
             }
         }
+        stage("test"){
+            steps{
+                powershell label: '', script:'Write-Output "Hello"'
+            }
+        }
         stage("Build"){
             steps{
                 powershell 'mvn clean package'
