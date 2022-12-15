@@ -9,7 +9,7 @@ pipeline{
         }
         stage("Build"){
             steps{
-                pwsh 'mvn clean package'
+                sh './mvnw clean package'
             }
         }
         stage('JUnit Tests'){
@@ -20,15 +20,15 @@ pipeline{
         }
         stage("Build Docker Image"){
             steps{
-                pwsh 'docker build -t mmohei/bmi_calculator_image .'
+                sh 'docker build -t mmohei/bmi_calculator_image .'
             }
         }
         stage("Push Docker Image"){
             steps{
                 withCredentials([string(credentialsId: '', variable: 'dockerhubpwd')]) {
-                    pwsh 'docker login -u mmohei -p ${dockerhubpwd}'
+                    sh 'docker login -u mmohei -p ${dockerhubpwd}'
             }
-            pwsh 'docker push mmohei/bmi_calculator_image'
+            sh 'docker push mmohei/bmi_calculator_image'
             }
         }
     }
