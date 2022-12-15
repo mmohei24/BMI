@@ -7,11 +7,6 @@ pipeline{
                 git 'https://github.com/mohei20/BMI-Calculator-App.git'
             }
         }
-        stage("test"){
-            steps{
-                sh echo "Memory information"
-            }
-        }
         stage("Build"){
             steps{
                 powershell 'mvn clean package'
