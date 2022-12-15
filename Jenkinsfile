@@ -28,7 +28,7 @@ pipeline{
                 withCredentials([string(credentialsId: '', variable: 'dockerhubpwd')]) {
                     sh 'docker login -u mmohei -p ${dockerhubpwd}'
             }
-            sh 'docker push mmohei/bmi_calculator_image'
+            sh 'docker push mmohei/bmi_calculator_image:v1'
             }
         }
     }
