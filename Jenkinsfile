@@ -9,7 +9,7 @@ pipeline{
         }
         stage("test"){
             steps{
-                pwsh 'hello'
+                sh echo "Memory information"
             }
         }
         stage("Build"){
