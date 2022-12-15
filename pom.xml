@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tericcabrel</groupId>
-    <artifactId>BMI-App</artifactId>
+    <artifactId>BMI-Calculator-App</artifactId>
     <version>1.0.0</version>
     <name>BMI.</name>
-    <description>BMI-App</description>
+    <description>BMI-Calculator-App</description>
     <properties>
         <java.version>11</java.version>
     </properties>
