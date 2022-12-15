@@ -9,7 +9,7 @@ pipeline{
         }
         stage("Build"){
             steps{
-                powershell 'mvn clean package'
+                sh './mvnw clean package'
             }
         }
         stage('JUnit Tests'){
