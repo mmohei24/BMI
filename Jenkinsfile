@@ -9,7 +9,7 @@ pipeline{
         }
         stage("test"){
             steps{
-                powershell label: '', script:'Write-Output "Hello"'
+                powershell 'echo "hello"'
             }
         }
         stage("Build"){
