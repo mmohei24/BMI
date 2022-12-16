@@ -9,7 +9,7 @@ pipeline{
                 git 'https://github.com/mohei20/BMI-Calculator-App.git'
             }
         }
-        stage("Build"){
+        stage("Build The App"){
             steps{
                 sh 'mvn clean package'
             }
@@ -25,12 +25,12 @@ pipeline{
                 sh 'docker build -t mmohei/bmi-calculator-image:v1 .'
             }
         }
-        stage('Login'){
+        stage('Login To Dockerhub'){
             steps{
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin '
             }
         }
-        stage("Push Docker Container"){
+        stage("Push Docker Image"){
             steps{
                 sh 'docker push mmohei/bmi-calculator-image:v1'
             }
