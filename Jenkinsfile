@@ -1,6 +1,8 @@
 pipeline{
     agent any
-
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('DockerHub')
+    }
     stages{
         stage("Checkout"){
             steps{
@@ -20,21 +22,23 @@ pipeline{
         }
         stage("Build Docker Image"){
             steps{
-                sh 'docker build -t mmohei/bmi_calculator_image .'
+                sh 'docker build -t mmohei/bmi-calculator-image:v1 .'
+            }
+        }
+        stage('Login'){
+            steps{
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin '
             }
         }
         stage("Push Docker Container"){
             steps{
-                echo "Workspace is $WORKSPACE"
-                dir("$WORKSPACE/bmi-calculator"){
-                script{
-                    docker.withRegistry('https://index.docker.io/v1/','DockerHub'){
-                        def image = docker.build('mmohei/bmi-calculator-image:v1')
-                        image.push()
-                        }
-                    }
-                }
+                sh 'docker push mmohei/bmi-calculator-image:v1'
             }
+        }
+    }
+    post{
+        always{
+            sh 'docker logout'
         }
     }
 }
