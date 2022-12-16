@@ -25,7 +25,7 @@ pipeline{
         }
         stage("Push Docker Container"){
             steps{
-                echo "Workspace is $WORKSPACE"
+                // echo "Workspace is $WORKSPACE"
                 dir("$WORKSPACE/bmi_calculator"){
                 script{
                     docker.withRegistry('https://index.docker.io/v1/','DockerHub'){
