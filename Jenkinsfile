@@ -25,11 +25,11 @@ pipeline{
         }
         stage("Push Docker Container"){
             steps{
-                // echo "Workspace is $WORKSPACE"
-                dir("$WORKSPACE/bmi_calculator"){
+                echo "Workspace is $WORKSPACE"
+                dir("$WORKSPACE/bmi-calculator"){
                 script{
                     docker.withRegistry('https://index.docker.io/v1/','DockerHub'){
-                        def image = docker.build('mmohei/bmi_calculator_image:v1')
+                        def image = docker.build('mmohei/bmi-calculator-image:v1')
                         image.push()
                         }
                     }
