@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage("Checkout"){
             steps{
-                git 'https://github.com/mohei20/BMI-Calculator-App.git'
+                git 'https://github.com/mohei20/BMI-Calculator-App-Pipeline.git'
             }
         }
         stage("Build The App"){
