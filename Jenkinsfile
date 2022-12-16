@@ -23,12 +23,17 @@ pipeline{
                 sh 'docker build -t mmohei/bmi_calculator_image .'
             }
         }
-        stage("Push Docker Image"){
+        stage("Push Docker Container"){
             steps{
-                withCredentials([string(credentialsId: '', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u mmohei -p ${dockerhubpwd}'
-            }
-            sh 'docker push mmohei/bmi_calculator_image:v1'
+                echo "Workspace is $WORKSPACE"
+                dir("$WORKSPACE/bmi_calculator"){
+                script{
+                    docker.withRegistry('https://index.docker.io/v1/','DockerHub'){
+                        def image = docker.build('mmohei/bmi_calculator_image:v1')
+                        image.push()
+                        }
+                    }
+                }
             }
         }
     }
