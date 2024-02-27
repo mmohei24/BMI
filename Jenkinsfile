@@ -25,7 +25,7 @@ pipeline{
                 sh 'docker build -t mmohei24/study:$BUILD_NUMBER .'
             }
         }
-        sstage('Login To Dockerhub'){
+        stage('Login To Dockerhub'){
             steps{
                 withCredentials([usernamePassword(credentialsId:'dockerhub-credintial', usernameVariable:'USERNAME', passwordVariable: 'PASSWORD')]){
                 sh'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
